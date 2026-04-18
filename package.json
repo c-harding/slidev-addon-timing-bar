@@ -1,12 +1,17 @@
 {
   "name": "slidev-addon-section-bar",
   "type": "module",
-  "private": true,
+  "version": "0.0.0",
+  "keywords": [
+    "slidev",
+    "slidev-addon"
+  ],
   "scripts": {
     "build": "slidev build",
     "dev": "slidev --open",
     "export": "slidev export"
   },
+  "license": "MIT",
   "dependencies": {
     "@slidev/cli": "^52.14.2",
     "@slidev/theme-default": "latest",
