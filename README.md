@@ -51,6 +51,21 @@ section:
 Even the first slide can be a section title slide.
 If it is not marked as as a section, it is treated as a prologue, and so is allocated no time.
 
+### Section title override
+
+By default, the timing bar uses the slide's title for each section label, either from the frontmatter’s `title` or the slide heading.
+Use `title` inside the `section` object to override the label shown in the timing bar without changing the slide heading:
+
+```md
+---
+section:
+  duration: 10m
+  title: Problem + Solution
+---
+
+# The Problem
+```
+
 ### Untimed sections
 
 Use `section: true` to mark a section without a planned duration.
@@ -163,12 +178,22 @@ In this case, there will not be any buffer time allocated at all.
 - Click on the progress bar icon to move the timing bar to the top/bottom of the screen, or to hide it.
 - The arrow in the button shows the bar’s current position.
 
+## Headmatter reference
+
+| Key        | Example   | Effect                                  |
+| ---------- | --------- | --------------------------------------- |
+| `duration` | `35min`   | Total presentation duration             |
+| `endTime`  | `'14:30'` | Target end time (enables end-time mode) |
+
 ## `section` frontmatter reference
+
+These options can be set in any slide’s frontmatter, including the first slide.
 
 | Value                                     | Effect                                                         |
 | ----------------------------------------- | -------------------------------------------------------------- |
 | `section: true`                           | Untimed section — shares unallocated time by slide count       |
 | `section: { duration: 5m }`               | Timed section with a planned duration                          |
+| `section: { title: Intro, duration: 5m }` | Override the label shown in the timing bar                     |
 | `section: { buffer: true }`               | Pure buffer point (zero-width wedge, absorbs unlimited excess) |
 | `section: { buffer: 1m }`                 | Buffer point with a cap on absorption                          |
 | `section: { duration: 5m, buffer: true }` | Timed section that also acts as an unlimited buffer point      |

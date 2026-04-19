@@ -2,6 +2,7 @@ import type { SlideRoute } from '@slidev/types';
 import { parseDuration } from './timeFormat';
 
 export interface ParsedSection {
+  title: string | null;
   duration: number | null;
   buffer: boolean;
   bufferLimit: number | null;
@@ -28,8 +29,9 @@ export function getFrontmatter(
 export function getSlideTitle(slide: SlideRoute): string {
   const fm = getFrontmatter(slide);
   const meta = slide.meta?.slide as { title?: string } | undefined;
+  const sectionTitle = parseSection(fm)?.title;
   return String(
-    fm?.shortTitle || fm?.title || meta?.title || `Slide ${slide.no}`,
+    sectionTitle || fm?.title || meta?.title || `Slide ${slide.no}`,
   );
 }
 
@@ -39,6 +41,7 @@ export function getSlideTitle(slide: SlideRoute): string {
  * Supported values:
  * - `section: true` — untimed section (no planned duration, shares unallocated time)
  * - `section: { duration: '5m' }` — timed section with a planned duration
+ * - `section: { title: 'Intro', duration: '5m' }` — override the label shown in the timing bar
  * - `section: { buffer: true }` — pure buffer point (zero-width wedge, absorbs unlimited excess)
  * - `section: { buffer: '1m' }` — buffer point with a cap on how much excess it can absorb
  * - `section: { duration: '5m', buffer: true }` — timed section that also acts as an unlimited buffer point
@@ -51,6 +54,7 @@ export function parseSection(
   if (!raw) return null;
   if (raw === true)
     return {
+      title: null,
       duration: null,
       buffer: false,
       bufferLimit: null,
@@ -66,7 +70,10 @@ export function parseSection(
       typeof obj.buffer === 'string'
         ? (parseDuration(obj.buffer) ?? 0) * 60 || null
         : null;
+    const title =
+      typeof obj.title === 'string' ? obj.title : null;
     return {
+      title,
       duration,
       buffer,
       bufferLimit,

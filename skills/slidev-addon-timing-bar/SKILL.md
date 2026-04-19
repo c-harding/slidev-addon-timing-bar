@@ -94,6 +94,20 @@ section:
 ---
 ```
 
+### Section title override
+
+Override the label shown in the timing bar without changing the slide heading:
+
+```md
+---
+section:
+  duration: 10m
+  title: Problem + Solution
+---
+
+# The Problem
+```
+
 ### Timed section with buffer
 
 ```yaml
@@ -120,6 +134,7 @@ section:
 | ----------------------------------------- | -------------------------------------------------------------- |
 | `section: true`                           | Untimed section — shares unallocated time by slide count       |
 | `section: { duration: 5m }`               | Timed section with a planned duration                          |
+| `section: { title: Intro, duration: 5m }` | Override the label shown in the timing bar                     |
 | `section: { buffer: true }`               | Pure buffer point (zero-width wedge, absorbs unlimited excess) |
 | `section: { buffer: 1m }`                 | Buffer point with a cap on absorption                          |
 | `section: { duration: 5m, buffer: true }` | Timed section that also acts as an unlimited buffer point      |
