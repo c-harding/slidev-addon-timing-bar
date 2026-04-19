@@ -392,6 +392,7 @@ function logRecordedDurations() {
         duration-string="-"
         :slides="slidesPerSection.get(prologueSection.no) ?? []"
         :active="currentSection === prologueSection.no"
+        :past="prologueSection.no < currentSection"
         :current-page="currentPage"
         :progress="sectionProgress"
         :position="barPosition"
@@ -416,6 +417,7 @@ function logRecordedDurations() {
               "
               :slides="slidesPerSection.get(section.no) ?? []"
               :active="currentSection === section.no"
+              :past="section.no < currentSection"
               :current-page="currentPage"
               :progress="sectionProgress"
               :position="barPosition"
@@ -548,8 +550,8 @@ function logRecordedDurations() {
         class="text-xs slidev-icon-btn"
         :title="
           endTimeSeconds
-            ? 'Catch up to end time'
-            : 'Catch up to end time (requires duration and end time)'
+            ? 'Catch up'
+            : 'Catch up (requires duration and end time)'
         "
         @click="playToEnd"
       >

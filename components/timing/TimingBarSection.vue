@@ -17,6 +17,7 @@ const {
   durationString,
   slides,
   active,
+  past = false,
   progress,
   position = 'top',
   wedge = false,
@@ -26,6 +27,7 @@ const {
   durationString: string;
   slides: { no: number; title: string }[];
   active: boolean;
+  past?: boolean;
   currentPage: number;
   progress: number;
   position?: 'top' | 'bottom';
@@ -86,7 +88,11 @@ function onSlideLeave() {
       <title>{{ title }}</title>
       <polygon
         :points="position === 'bottom' ? '6,0 12,12 0,12' : '0,0 12,0 6,12'"
-        :class="active ? 'fill-blue-300 dark:fill-blue-800' : 'fill-gray-300 dark:fill-gray-600'"
+        :class="
+          active
+            ? 'fill-blue-300 dark:fill-blue-800'
+            : 'fill-gray-300 dark:fill-gray-600'
+        "
         paint-order="stroke"
         stroke-linejoin="miter"
         class="stroke-white dark:stroke-[#121212]"
@@ -99,10 +105,11 @@ function onSlideLeave() {
     <div
       class="p-0.5 border-white dark:border-[#121212] border-2 cursor-pointer text-center relative min-w-0 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 flex-1"
       :class="[
-        active
+        active && 'bg-blue-300! dark:bg-blue-800!',
+        active || past
           ? position === 'bottom'
-            ? 'bg-blue-300! dark:bg-blue-800! pt-2'
-            : 'bg-blue-300! dark:bg-blue-800! pb-2'
+            ? 'pt-2'
+            : 'pb-2'
           : position === 'bottom'
             ? 'hover:pt-2 not-hover:border-t-8'
             : 'hover:pb-2 not-hover:border-b-8',
@@ -112,10 +119,15 @@ function onSlideLeave() {
       <div class="truncate" :title="title">{{ title }}</div>
       <div class="truncate">{{ durationString }}</div>
       <div
-        v-if="active"
-        class="absolute left-0 h-1.5 bg-blue-600 dark:bg-blue-500"
-        :class="position === 'bottom' ? 'top-0' : 'bottom-0'"
-        :style="{ width: progress + '%' }"
+        v-if="active || past"
+        class="absolute left-0 h-1.5"
+        :class="[
+          position === 'bottom' ? 'top-0' : 'bottom-0',
+          active
+            ? 'bg-blue-600 dark:bg-blue-500'
+            : 'bg-gray-500 dark:bg-gray-400',
+        ]"
+        :style="{ width: past ? '100%' : progress + '%' }"
       />
       <div
         class="absolute left-0 right-0 flex h-1.5"
@@ -125,7 +137,11 @@ function onSlideLeave() {
           v-for="s in slides"
           :key="s.no"
           class="flex-1 cursor-pointer outline-solid outline-2 -outline-offset-2 outline-transparent -my-0.5 relative first:-ml-0.5 last:-mr-0.5"
-          :class="active ? 'hover:outline-blue-900 dark:hover:outline-blue-400' : 'hover:outline-gray-700 dark:hover:outline-gray-400'"
+          :class="
+            active
+              ? 'hover:outline-blue-900 dark:hover:outline-blue-400'
+              : 'hover:outline-gray-700 dark:hover:outline-gray-400'
+          "
           :style="{
             anchorName:
               hoveredSlide?.no === s.no ? '--hovered-slide' : undefined,
@@ -197,9 +213,9 @@ function onSlideLeave() {
   transition: fill 0.15s;
 }
 .section-wedge-wrapper:hover polygon {
-  --uno: fill-gray-400 dark:fill-gray-500;
+  --uno: fill-gray-400 'dark:fill-gray-500';
 }
 .section-wedge-wrapper--active:hover polygon {
-  --uno: fill-blue-400 dark:fill-blue-700;
+  --uno: fill-blue-400 'dark:fill-blue-700';
 }
 </style>
