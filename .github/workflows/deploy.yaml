@@ -47,7 +47,7 @@ jobs:
         run: |
           for filename in slides-*.md; do
             name="${filename%.md}"
-            nr build --base "${{ steps.setup-pages.outputs.base_path }}/$name/" --out "dist/$name"
+            nr build "$filename" --base "${{ steps.setup-pages.outputs.base_path }}/$name/" --out "dist/$name"
           done
 
       - uses: actions/upload-pages-artifact@v3

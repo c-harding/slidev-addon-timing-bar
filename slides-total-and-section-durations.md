@@ -1,6 +1,6 @@
 ---
 theme: default
-title: 'slidev-addon-timing-bar'
+title: 'slidev-addon-timing-bar (total and section durations)'
 info: |
   ## slidev-addon-timing-bar
   Section-based timing for Slidev presentations.
