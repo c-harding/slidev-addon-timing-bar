@@ -18,5 +18,12 @@ _Charlie Harding · April 2026_
 <!--
 Welcome! This slide deck explains the slidev-addon-timing-bar addon — and dogfoods it at the same time.
 The timing bar is live in presenter mode right now.
-Notice this title slide has no `section` marker — it's a prologue and gets zero allocated time.
+
+There are different versions of the slides in this repo:
+
+- [slides.md](https://c-harding.github.io/slidev-addon-timing-bar/) (default)
+- [slides-no-timings.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-no-timings/) (no sections or durations at all)
+- [slides-with-untimed.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-with-untimed/) (includes untimed sections for testing)
+- [slides-total-duration.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-total-duration/) (only total duration set, no sections)
+- [slides-total-and-section-durations.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-total-and-section-durations/) (total and section durations set, but no buffer)
 -->

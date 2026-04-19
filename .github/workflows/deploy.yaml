@@ -1,0 +1,70 @@
+name: Deploy pages
+
+on:
+  workflow_dispatch:
+  push:
+    branches: main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 'lts/*'
+
+      - name: Setup @antfu/ni
+        run: npm i -g @antfu/ni
+
+      - name: Install dependencies
+        run: nci
+
+      - name: Set hash router mode
+        run: |
+          for filename in slides.md slides-*.md; do
+            sed -i '/^routerMode:/d' "$filename"
+            sed -i '1a routerMode: hash' "$filename"
+          done
+
+      - name: Setup Pages
+        id: setup-pages
+        uses: actions/configure-pages@v4
+
+      - name: Build
+        run: nr build --base "${{ steps.setup-pages.outputs.base_path }}/"
+
+      - name: Build others
+        run: |
+          for filename in slides-*.md; do
+            name="${filename%.md}"
+            nr build --base "${{ steps.setup-pages.outputs.base_path }}/$name/" --out "dist/$name"
+          done
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

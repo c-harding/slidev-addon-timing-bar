@@ -5,6 +5,20 @@ Plan your talk with per-section durations, track your progress in real time, and
 
 ![Timing bar in the presenter view](public/timing-bar.png)
 
+## Demo
+
+[slides.md](https://c-harding.github.io/slidev-addon-timing-bar/) (default)
+
+<details>
+<summary>Other slide variants</summary>
+
+- [slides-no-timings.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-no-timings/) (no sections or durations at all)
+- [slides-with-untimed.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-with-untimed/) (includes untimed sections for testing)
+- [slides-total-duration.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-total-duration/) (only total duration set, no sections)
+- [slides-total-and-section-durations.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-total-and-section-durations/) (total and section durations set, but no buffer)
+
+</details>
+
 ## Installation
 
 ```bash

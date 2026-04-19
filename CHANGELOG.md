@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- GitHub Pages site: https://c-harding.github.io/slidev-addon-timing-bar/
+
 ## [0.1.0] - 2026-04-20
 
 ### Added
