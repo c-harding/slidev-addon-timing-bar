@@ -28,11 +28,7 @@ defineExpose({ show, close });
 </script>
 
 <template>
-  <dialog
-    ref="dialogRef"
-    class="rounded-lg shadow-xl max-w-xl w-full max-h-[80vh] text-sm backdrop:bg-black/40 p-0"
-    @click.self="close()"
-  >
+  <dialog ref="dialogRef" class="slidev-timing-modal" @click.self="close()">
     <div class="p-5">
       <div class="flex justify-between items-center mb-3">
         <h2 class="text-base font-bold">Recorded Timings</h2>
@@ -43,17 +39,14 @@ defineExpose({ show, close });
           &times;
         </button>
       </div>
-      <table class="w-full border-collapse block max-h-[60vh] overflow-y-auto">
-        <thead
-          class="sticky top-0 bg-white"
-          style="box-shadow: inset 0 -2px 0 var(--un-color-gray-300, #d1d5db)"
-        >
-          <tr class="text-left">
-            <th class="py-1 pr-2 text-right">#</th>
-            <th class="py-1 pr-2">Title</th>
-            <th class="py-1 pr-2 text-right whitespace-nowrap">Actual</th>
-            <th class="py-1 pr-2 text-right whitespace-nowrap">Planned</th>
-            <th class="py-1 pr-4 text-right whitespace-nowrap">Diff</th>
+      <table>
+        <thead>
+          <tr>
+            <th class="text-right">#</th>
+            <th>Title</th>
+            <th class="text-right whitespace-nowrap">Actual</th>
+            <th class="text-right whitespace-nowrap">Planned</th>
+            <th class="text-right whitespace-nowrap">Diff</th>
           </tr>
         </thead>
         <tbody>
@@ -62,16 +55,16 @@ defineExpose({ show, close });
               class="font-semibold bg-gray-50"
               :class="i > 0 && 'border-t-2 border-gray-200'"
             >
-              <td class="py-1 pr-2" />
-              <td class="py-1 pr-2">{{ section.title }}</td>
-              <td class="py-1 pr-2 text-right whitespace-nowrap">
+              <td />
+              <td>{{ section.title }}</td>
+              <td class="text-right whitespace-nowrap">
                 {{ secondsToString(section.actualSeconds) }}
               </td>
-              <td class="py-1 pr-2 text-right whitespace-nowrap">
+              <td class="text-right whitespace-nowrap">
                 {{ secondsToString(section.plannedSeconds) }}
               </td>
               <td
-                class="py-1 pr-4 text-right whitespace-nowrap"
+                class="text-right whitespace-nowrap"
                 :class="
                   section.actualSeconds > section.plannedSeconds
                     ? 'text-red-600'
@@ -91,12 +84,12 @@ defineExpose({ show, close });
               :key="slide.no"
               class="border-t border-gray-100"
             >
-              <td class="py-0.5 pr-2 text-right text-gray-400">
+              <td class="text-right text-gray-400">
                 {{ slide.no }}
               </td>
-              <td class="py-0.5 pr-2">{{ slide.title }}</td>
+              <td>{{ slide.title }}</td>
               <td
-                class="py-0.5 pr-2 text-right whitespace-nowrap"
+                class="text-right whitespace-nowrap"
                 :title="
                   slide.visitDurations
                     .map((d) => secondsToString(d))
@@ -110,21 +103,18 @@ defineExpose({ show, close });
             </tr>
           </template>
         </tbody>
-        <tfoot
-          class="sticky bottom-0 bg-white font-semibold"
-          style="box-shadow: inset 0 2px 0 var(--un-color-gray-300, #d1d5db)"
-        >
+        <tfoot>
           <tr>
-            <td class="py-1 pr-2" />
-            <td class="py-1 pr-2">Total</td>
-            <td class="py-1 pr-2 text-right whitespace-nowrap">
+            <td />
+            <td>Total</td>
+            <td class="text-right whitespace-nowrap">
               {{ secondsToString(totalActual) }}
             </td>
-            <td class="py-1 pr-2 text-right whitespace-nowrap">
+            <td class="text-right whitespace-nowrap">
               {{ secondsToString(totalPlanned) }}
             </td>
             <td
-              class="py-1 pr-4 text-right whitespace-nowrap"
+              class="text-right whitespace-nowrap"
               :class="
                 totalActual > totalPlanned ? 'text-red-600' : 'text-green-700'
               "
@@ -138,3 +128,36 @@ defineExpose({ show, close });
     </div>
   </dialog>
 </template>
+
+<style scoped>
+.slidev-timing-modal {
+  max-width: min(100%, 36rem);
+  max-height: 80vh;
+  --uno: rounded-lg shadow-xl inset-4 text-sm 'backdrop:bg-black/40' p-0;
+}
+
+table {
+  max-height: 60vh;
+  --uno: w-full border-collapse block overflow-y-auto;
+}
+
+thead {
+  box-shadow: inset 0 -2px 0 var(--un-color-gray-300, #d1d5db);
+  --uno: sticky top-0 bg-white text-left;
+}
+
+tfoot {
+  box-shadow: inset 0 2px 0 var(--un-color-gray-300, #d1d5db);
+  --uno: sticky bottom-0 bg-white font-semibold;
+}
+
+th,
+td {
+  --uno: py-1 pr-2;
+}
+
+th:last-child,
+td:last-child {
+  --uno: pr-4;
+}
+</style>
