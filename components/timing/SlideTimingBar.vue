@@ -496,7 +496,10 @@ function logRecordedDurations() {
     to=".slidev-presenter > .grid-container > .grid-section.bottom"
   >
     <div class="flex items-center px-2">
-      <fieldset class="flex flex-col text-xs gap-1 justify-center w-24">
+      <fieldset
+        v-if="barPosition !== 'hidden'"
+        class="flex flex-col text-xs gap-1 justify-center w-24"
+      >
         <label
           class="flex items-center gap-1 cursor-pointer"
           title="Presentation duration"
@@ -570,9 +573,14 @@ function logRecordedDurations() {
         </label>
       </fieldset>
       <button
+        v-if="barPosition !== 'hidden'"
         :disabled="!showPlayToEnd"
         class="text-xs slidev-icon-btn"
-        title="Catch up to end time"
+        :title="
+          endTimeSeconds
+            ? 'Catch up to end time'
+            : 'Catch up to end time (requires duration and end time)'
+        "
         @click="playToEnd"
       >
         <svg
@@ -591,7 +599,7 @@ function logRecordedDurations() {
         class="text-xs slidev-icon-btn"
         :title="
           hasRecordedDurations
-            ? 'Log recorded timings to console'
+            ? 'Show recorded timings'
             : 'No recorded timings yet'
         "
         @click="logRecordedDurations()"
@@ -600,6 +608,10 @@ function logRecordedDurations() {
       </button>
       <button
         class="text-xs slidev-icon-btn"
+        :class="{
+          'arrow-up': barPosition === 'top',
+          'arrow-down': barPosition === 'bottom',
+        }"
         title="Toggle timing bar"
         @click="cycleBarPosition()"
       >
@@ -656,5 +668,39 @@ function logRecordedDurations() {
   );
   border-radius: 4px;
   color: rgb(107, 114, 128);
+}
+
+.slidev-icon-btn:disabled {
+  opacity: 40%;
+
+  &:hover {
+    background: transparent;
+  }
+}
+
+button.arrow-up,
+button.arrow-down {
+  --uno: relative;
+}
+
+button.arrow-up::before,
+button.arrow-down::before {
+  content: '';
+  position: absolute;
+  width: 0;
+  border-width: 3px;
+  border-color: transparent;
+  inset-inline: 0;
+  margin-inline: auto;
+}
+
+button.arrow-up::before {
+  top: 3px;
+  border-bottom-color: currentColor;
+}
+
+button.arrow-down::before {
+  bottom: 3px;
+  border-top-color: currentColor;
 }
 </style>
