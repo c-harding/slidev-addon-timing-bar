@@ -173,6 +173,14 @@ In this case, there will not be any buffer time allocated at all.
 | `section: { duration: 5m, buffer: true }` | Timed section that also acts as an unlimited buffer point      |
 | `section: { duration: 5m, buffer: 1m }`   | Timed section that also acts as a capped buffer point          |
 
+## AI Agent Skill
+
+This addon ships with an [agent skill](https://skills.sh/) so AI coding assistants can help you configure timing sections:
+
+```bash
+npx skills add slidev-addon-timing-bar
+```
+
 ## License
 
 [MIT](./LICENSE)
