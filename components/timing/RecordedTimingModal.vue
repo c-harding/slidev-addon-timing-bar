@@ -28,7 +28,11 @@ defineExpose({ show, close });
 </script>
 
 <template>
-  <dialog ref="dialogRef" class="slidev-timing-modal" @click.self="close()">
+  <dialog
+    ref="dialogRef"
+    class="slidev-recorded-timing-modal"
+    @click.self="close()"
+  >
     <div class="p-5">
       <div class="flex justify-between items-center mb-3">
         <h2 class="text-base font-bold">Recorded Timings</h2>
@@ -130,7 +134,7 @@ defineExpose({ show, close });
 </template>
 
 <style scoped>
-.slidev-timing-modal {
+.slidev-recorded-timing-modal {
   max-width: min(100%, 36rem);
   max-height: 80vh;
   --uno: rounded-lg shadow-xl inset-4 text-sm 'backdrop:bg-black/40' p-0;

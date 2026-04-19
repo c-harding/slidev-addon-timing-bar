@@ -9,9 +9,9 @@ import {
   parseSection,
   type SectionInfoItem,
 } from './parseFrontmatter';
+import RecordedTimingModal from './RecordedTimingModal.vue';
 import { parseDuration, secondsToString } from './timeFormat';
 import TimingBarSection from './TimingBarSection.vue';
-import TimingModal from './TimingModal.vue';
 import { useBufferConsumption } from './useBufferConsumption';
 import { useEndTime } from './useEndTime';
 import { useTimingRecorder } from './useTimingRecorder';
@@ -353,14 +353,11 @@ const hasRecordedDurations = computed(
   () => Object.keys(recordedDurations.value).length > 0,
 );
 
-const showTimingModal = ref<InstanceType<typeof TimingModal>>();
+const showTimingModal = ref<InstanceType<typeof RecordedTimingModal>>();
 
 const timingSummary = computed(() => {
   const slideTitles = new Map(
-    slides.value.map((s) => [
-      s.no,
-      String(getFrontmatter(s)?.title ?? `Slide ${s.no}`),
-    ]),
+    slides.value.map((s) => [s.no, getSlideTitle(s)]),
   );
   return summariseDurations(
     recordedDurations.value,
@@ -619,7 +616,7 @@ function logRecordedDurations() {
       </button>
     </div>
   </Teleport>
-  <TimingModal ref="showTimingModal" :sections="timingSummary" />
+  <RecordedTimingModal ref="showTimingModal" :sections="timingSummary" />
 </template>
 
 <style>
