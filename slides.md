@@ -31,7 +31,7 @@ The last comment block of each slide will be treated as slide notes. It will be 
 -->
 
 ---
-src: pages/intro.md
+src: pages/old-intro.md
 ---
 
 ---
@@ -44,7 +44,7 @@ class: text-center
 Code, themes, and more
 
 ---
-src: pages/features.md
+src: pages/old-features.md
 ---
 
 ---
@@ -57,7 +57,7 @@ class: text-center
 Clicks, motions, and $\LaTeX$
 
 ---
-src: pages/animations.md
+src: pages/old-animations.md
 ---
 
 ---
@@ -70,7 +70,7 @@ class: text-center
 Diagrams, editors, and interactive elements
 
 ---
-src: pages/integrations.md
+src: pages/old-integrations.md
 ---
 
 ---
