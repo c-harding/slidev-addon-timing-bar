@@ -6,7 +6,7 @@ Thanks for your interest in contributing to **slidev-addon-timing-bar**!
 
 1. Clone the repo
 2. Install dependencies: `pnpm install`
-3. Run the demo presentation: `pnpm slidev slides-new.md`
+3. Run the demo presentation: `pnpm slidev slides.md`
 4. Open presenter mode to see the timing bar in action
 
 ## Documentation
@@ -14,7 +14,7 @@ Thanks for your interest in contributing to **slidev-addon-timing-bar**!
 When changing features or adding new options, keep these three sources of documentation in sync:
 
 1. **[README.md](README.md)** — public-facing docs for npm and GitHub
-2. **[slides-new.md](slides-new.md)** (and `pages/`) — the demo/dogfood slide deck, including the Quick Reference slides
+2. **[slides.md](slides.md)** (and `pages/`) — the demo/dogfood slide deck, including the Quick Reference slides
 3. **[skills/slidev-addon-timing-bar/SKILL.md](skills/slidev-addon-timing-bar/SKILL.md)** — the AI agent skill used by coding assistants
 
 ## Submitting Changes
