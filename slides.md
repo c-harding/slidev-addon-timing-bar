@@ -37,7 +37,6 @@ src: pages/intro.md
 ---
 layout: center
 class: text-center
-title: Features
 ---
 
 # Features
@@ -51,7 +50,6 @@ src: pages/features.md
 ---
 layout: center
 class: text-center
-title: Animations
 ---
 
 # Animations
@@ -65,7 +63,6 @@ src: pages/animations.md
 ---
 layout: center
 class: text-center
-title: Integrations
 ---
 
 # Integrations

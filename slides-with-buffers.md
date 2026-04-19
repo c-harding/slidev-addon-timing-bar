@@ -54,7 +54,6 @@ src: pages/features.md
 ---
 layout: center
 class: text-center
-title: Animations
 section:
   duration: 1m
   buffer: 30s
@@ -63,9 +62,6 @@ section:
 # Animations
 
 Clicks, motions, and $\LaTeX$
-
----
-
 
 ---
 src: pages/animations.md
@@ -84,7 +80,6 @@ title: 'Animations: Q & A'
 ---
 layout: center
 class: text-center
-title: Integrations
 section:
   duration: 1m
 ---

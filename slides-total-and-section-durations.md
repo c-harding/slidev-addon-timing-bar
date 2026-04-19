@@ -39,7 +39,6 @@ src: pages/intro.md
 ---
 layout: center
 class: text-center
-title: Features
 section:
   duration: 1m
 ---
@@ -55,7 +54,6 @@ src: pages/features.md
 ---
 layout: center
 class: text-center
-title: Animations
 section:
   duration: 1m
 ---
@@ -65,16 +63,12 @@ section:
 Clicks, motions, and $\LaTeX$
 
 ---
-
-
----
 src: pages/animations.md
 ---
 
 ---
 layout: center
 class: text-center
-title: Integrations
 section:
   duration: 1m
 ---
