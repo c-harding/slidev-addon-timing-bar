@@ -11,6 +11,7 @@ import {
 } from './parseFrontmatter';
 import RecordedTimingModal from './RecordedTimingModal.vue';
 import { parseDuration, secondsToString } from './timeFormat';
+import TimingBarBuffer from './TimingBarBuffer.vue';
 import TimingBarSection from './TimingBarSection.vue';
 import { useBufferConsumption } from './useBufferConsumption';
 import { useEndTime } from './useEndTime';
@@ -426,49 +427,21 @@ function logRecordedDurations() {
               "
             />
             <!-- Consumed buffer block at this buffer point -->
-            <div
+            <TimingBarBuffer
               v-if="section.isBuffer && bufferConsumedAt(section.no) > 0"
-              class="overflow-x-hidden min-w-0 self-stretch flex"
-              :style="{
-                flexBasis: 0,
-                flexGrow: bufferConsumedAt(section.no),
-              }"
-            >
-              <div
-                class="flex-1 buffer-segment p-0.5 border-white border-2 text-center min-w-0 cursor-default"
-                :class="barPosition === 'bottom' ? 'border-t-8' : 'border-b-8'"
-                :title="
-                  section.title +
-                  ': ' +
-                  secondsToString(bufferConsumedAt(section.no)) +
-                  ' buffer consumed'
-                "
-              >
-                <div class="truncate text-[10px]">
-                  {{ secondsToString(bufferConsumedAt(section.no)) }}
-                </div>
-              </div>
-            </div>
+              :title="section.title"
+              :duration-seconds="bufferConsumedAt(section.no)"
+              :position="barPosition"
+              :target-slide="slidesPerSection.get(section.no)?.at(-1)?.no"
+            />
           </template>
           <!-- Trailing buffer: remaining after all consumption -->
-          <div
+          <TimingBarBuffer
             v-if="remainingBuffer > 0"
-            class="overflow-x-hidden min-w-0 self-stretch flex"
-            :style="{
-              flexBasis: 0,
-              flexGrow: remainingBuffer,
-            }"
-          >
-            <div
-              class="flex-1 buffer-segment p-0.5 border-white border-2 text-center min-w-0 cursor-default"
-              :class="barPosition === 'bottom' ? 'border-t-8' : 'border-b-8'"
-              :title="'Buffer: ' + secondsToString(remainingBuffer)"
-            >
-              <div class="truncate text-[10px]">
-                {{ secondsToString(remainingBuffer) }}
-              </div>
-            </div>
-          </div>
+            :duration-seconds="remainingBuffer"
+            :position="barPosition"
+            :target-slide="allSlides.at(-1)?.no"
+          />
         </div>
         <!-- Progress marker -->
         <div class="relative h-3 mt-1">
@@ -653,18 +626,6 @@ function logRecordedDurations() {
 .slidev-presenter:has(.slide-timing-bar--top)
   :is(.notes-vertical-resizer, .notes-vertical-resizer-left) {
   top: var(--slidev-timing-bar-height, 0);
-}
-
-.buffer-segment {
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 3px,
-    rgba(128, 128, 128, 0.15) 3px,
-    rgba(128, 128, 128, 0.15) 6px
-  );
-  border-radius: 4px;
-  color: rgb(107, 114, 128);
 }
 
 .slidev-icon-btn:disabled {

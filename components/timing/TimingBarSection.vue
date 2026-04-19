@@ -74,6 +74,7 @@ function onSlideLeave() {
   <div
     v-if="wedge"
     class="section-wedge-wrapper cursor-pointer"
+    :class="{ 'section-wedge-wrapper--active': active }"
     :title="title"
     @click="go(sectionNo)"
   >
@@ -85,7 +86,7 @@ function onSlideLeave() {
       <title>{{ title }}</title>
       <polygon
         :points="position === 'bottom' ? '6,0 12,12 0,12' : '0,0 12,0 6,12'"
-        :fill="active ? 'rgb(147,197,253)' : 'rgb(209,213,219)'"
+        :class="active ? 'fill-blue-300' : 'fill-gray-300'"
         paint-order="stroke"
         stroke-linejoin="miter"
         stroke="white"
@@ -179,7 +180,7 @@ function onSlideLeave() {
   width: 0;
   position: relative;
   align-self: stretch;
-  z-index: 10;
+  z-index: calc(10);
 }
 .section-wedge {
   position: absolute;
@@ -192,6 +193,9 @@ function onSlideLeave() {
   transition: fill 0.15s;
 }
 .section-wedge-wrapper:hover polygon {
-  fill: rgb(156, 163, 175) !important;
+  --uno: fill-gray-400;
+}
+.section-wedge-wrapper--active:hover polygon {
+  --uno: fill-blue-400;
 }
 </style>
