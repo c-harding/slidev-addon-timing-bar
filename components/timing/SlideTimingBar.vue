@@ -378,9 +378,9 @@ function logRecordedDurations() {
 <template>
   <Teleport v-if="barPosition !== 'hidden'" defer :to="'.slidev-presenter'">
     <div
-      class="slide-timing-bar flex flex-row items-stretch col-span-full px-2 bg-main border-main"
+      class="slidev-timing-bar flex flex-row items-stretch col-span-full px-2 bg-main border-main overflow-x-auto"
       :class="[
-        `slide-timing-bar--${barPosition}`,
+        `slidev-timing-bar--${barPosition}`,
         barPosition === 'bottom' ? 'border-t pb-7px' : 'border-b pt-7px',
       ]"
       :style="{ order: barPosition === 'top' ? -10 : 10 }"
@@ -601,7 +601,7 @@ function logRecordedDurations() {
   overflow: hidden;
 }
 
-.slidev-presenter:has(.slide-timing-bar--top) > :first-child {
+.slidev-presenter:has(.slidev-timing-bar--top) > :first-child {
   display: none;
 }
 
@@ -617,7 +617,7 @@ function logRecordedDurations() {
 }
 
 /* Adjust the notes vertical resizer position */
-.slidev-presenter:has(.slide-timing-bar--bottom)
+.slidev-presenter:has(.slidev-timing-bar--bottom)
   :is(.notes-vertical-resizer, .notes-vertical-resizer-left) {
   bottom: calc(
     var(--slidev-timing-bar-height, 0) +
@@ -625,7 +625,7 @@ function logRecordedDurations() {
   );
 }
 
-.slidev-presenter:has(.slide-timing-bar--top)
+.slidev-presenter:has(.slidev-timing-bar--top)
   :is(.notes-vertical-resizer, .notes-vertical-resizer-left) {
   top: var(--slidev-timing-bar-height, 0);
 }

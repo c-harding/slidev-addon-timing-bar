@@ -153,9 +153,9 @@ function onSlideLeave() {
       </div>
       <div
         v-if="tooltipVisible && hoveredSlide"
-        class="slide-tooltip"
+        class="slidev-tooltip"
         :class="
-          position === 'top' ? 'slide-tooltip--below' : 'slide-tooltip--above'
+          position === 'top' ? 'slidev-tooltip--below' : 'slidev-tooltip--above'
         "
       >
         {{ hoveredSlide.no }}.
@@ -166,17 +166,13 @@ function onSlideLeave() {
 </template>
 
 <style>
-.slide-tooltip {
+.slidev-tooltip {
   position: fixed;
   position-anchor: --hovered-slide;
   justify-self: anchor-center;
   z-index: 200;
   background: rgb(0 0 0 / 0.8);
   color: white;
-}
-.dark .slide-tooltip {
-  background: rgb(255 255 255 / 0.85);
-  color: #121212;
   font-size: 0.75rem;
   border-radius: 0.25rem;
   padding: 0.125rem 0.375rem;
@@ -184,13 +180,18 @@ function onSlideLeave() {
   pointer-events: none;
 }
 
-.slide-tooltip--below {
+.dark .slidev-tooltip {
+  background: rgb(255 255 255 / 0.85);
+  color: #121212;
+}
+
+.slidev-tooltip--below {
   top: anchor(bottom);
   margin-top: 20px;
   position-try-fallbacks: flip-block;
 }
 
-.slide-tooltip--above {
+.slidev-tooltip--above {
   bottom: anchor(top);
   margin-bottom: 2px;
   position-try-fallbacks: flip-block;
@@ -202,6 +203,7 @@ function onSlideLeave() {
   align-self: stretch;
   z-index: calc(10);
 }
+
 .section-wedge {
   position: absolute;
   left: -6px;
@@ -209,12 +211,15 @@ function onSlideLeave() {
   overflow: visible;
   cursor: pointer;
 }
+
 .section-wedge polygon {
   transition: fill 0.15s;
 }
+
 .section-wedge-wrapper:hover polygon {
   --uno: fill-gray-400 'dark:fill-gray-500';
 }
+
 .section-wedge-wrapper--active:hover polygon {
   --uno: fill-blue-400 'dark:fill-blue-700';
 }
