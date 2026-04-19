@@ -1,93 +1,114 @@
 ---
-# try also 'default' to start simple
 theme: default
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: 'slidev-addon-timing-bar'
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply UnoCSS classes to the current slide
+  ## slidev-addon-timing-bar
+  Section-based timing for Slidev presentations.
 class: text-center
-# https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
-# enable Comark Syntax: https://comark.dev/syntax/markdown
 comark: true
-# duration of the presentation
-duration: 4min
----
-
-# Welcome to Slidev
-
-Presentation slides for developers
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
----
-src: pages/old-intro.md
----
-
----
-layout: center
-class: text-center
+endTime: '14:30'
 section:
   duration: 1m
+src: pages/title.md
+---
+
+---
+src: pages/problem.md
+section:
+  duration: 1m
+  title: Problem + Solution
+---
+
+---
+src: pages/solution.md
+---
+
+---
+layout: section
+section:
+  duration: 2m30s
+---
+
+# Getting Started
+
+---
+src: pages/getting-started.md
+---
+
+---
+layout: section
+section:
+  duration: 3m
+---
+
+# Section Durations
+
+---
+src: pages/section-durations.md
+---
+
+---
+layout: section
+section:
+  duration: 3m
+---
+
+# Buffers
+
+---
+src: pages/buffers.md
+---
+
+---
+layout: section
+section:
+  duration: 4m
 ---
 
 # Features
 
-Code, themes, and more
-
 ---
-src: pages/old-features.md
+src: pages/features.md
 ---
 
 ---
-layout: center
-class: text-center
+layout: section
 section:
-  duration: 1m
+  duration: 3m
 ---
 
-# Animations
+# Under the Hood
 
-Clicks, motions, and $\LaTeX$
-
----
-src: pages/old-animations.md
----
+<!--
+This section is marked with `buffer: true` — if we're running short on time, it can absorb the excess and we can move quickly through it. Meta!
+-->
 
 ---
-layout: center
-class: text-center
+src: pages/under-the-hood.md
+---
+
+---
+layout: section
 section:
-  duration: 1m
+  duration: 1.5m
 ---
 
-# Integrations
-
-Diagrams, editors, and interactive elements
+# Wrap-Up
 
 ---
-src: pages/old-integrations.md
+src: pages/wrap-up.md
 ---
 
 ---
-layout: center
-class: text-center
+src: pages/quick-reference-heading.md
+section:
+  duration: 4m
+  title: Quick Reference
 ---
 
-# Learn More
-
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
-
-<PoweredBySlidev mt-10 />
+---
+src: pages/quick-reference.md
+---

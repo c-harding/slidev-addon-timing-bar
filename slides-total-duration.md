@@ -1,87 +1,94 @@
 ---
-# try also 'default' to start simple
 theme: default
-# random image from a curated Unsplash collection by Anthony
-# like them? see https://unsplash.com/collections/94734566/slidev
-background: https://cover.sli.dev
-# some information about your slides (markdown enabled)
-title: Welcome to Slidev
+title: 'slidev-addon-timing-bar'
 info: |
-  ## Slidev Starter Template
-  Presentation slides for developers.
-
-  Learn more at [Sli.dev](https://sli.dev)
-# apply UnoCSS classes to the current slide
+  ## slidev-addon-timing-bar
+  Section-based timing for Slidev presentations.
 class: text-center
-# https://sli.dev/features/drawing
 drawings:
   persist: false
-# slide transition: https://sli.dev/guide/animations.html#slide-transitions
 transition: slide-left
-# enable Comark Syntax: https://comark.dev/syntax/markdown
 comark: true
-# duration of the presentation
-duration: 4min
----
-
-# Welcome to Slidev
-
-Presentation slides for developers
-
-<!--
-The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
--->
-
----
-src: pages/old-intro.md
+endTime: '14:30'
+src: pages/title.md
 ---
 
 ---
-layout: center
-class: text-center
+src: pages/problem.md
+---
+
+---
+src: pages/solution.md
+---
+
+---
+layout: section
+---
+
+# Getting Started
+
+---
+src: pages/getting-started.md
+---
+
+---
+layout: section
+---
+
+# Section Durations
+
+---
+src: pages/section-durations.md
+---
+
+---
+layout: section
+---
+
+# Buffers
+
+---
+src: pages/buffers.md
+---
+
+---
+layout: section
 ---
 
 # Features
 
-Code, themes, and more
-
 ---
-src: pages/old-features.md
+src: pages/features.md
 ---
 
 ---
-layout: center
-class: text-center
+layout: section
 ---
 
-# Animations
+# Under the Hood
 
-Clicks, motions, and $\LaTeX$
-
----
-src: pages/old-animations.md
----
+<!--
+This section is marked with `buffer: true` — if we're running short on time, it can absorb the excess and we can move quickly through it. Meta!
+-->
 
 ---
-layout: center
-class: text-center
----
-
-# Integrations
-
-Diagrams, editors, and interactive elements
-
----
-src: pages/old-integrations.md
+src: pages/under-the-hood.md
 ---
 
 ---
-layout: center
-class: text-center
+layout: section
 ---
 
-# Learn More
+# Wrap-Up
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+---
+src: pages/wrap-up.md
+---
 
-<PoweredBySlidev mt-10 />
+---
+src: pages/quick-reference-heading.md
+---
+
+---
+src: pages/quick-reference.md
+---
