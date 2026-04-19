@@ -131,7 +131,7 @@ Durations accept flexible formats: `5m`, `1h20m`, `90s`, `4m30s`, `1.5min`.
 
 ## Key Behaviours
 
-- Slides before the first `section:` slide form a **prologue** — displayed as a fixed-width block outside the timed bar.
+- Even the first slide can be a section title slide. If it is not marked as a section, it is treated as a **prologue** and is allocated no time.
 - The progress arrow is **black** (on track), **green** (ahead), or **red** (behind schedule).
 - The active section is highlighted in blue with an internal progress bar.
 - Hover over the bar to see individual slide titles; click to navigate.

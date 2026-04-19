@@ -48,7 +48,8 @@ section:
 # My Section Title
 ```
 
-Slides before the first `section:` slide form a prologue and are displayed as a fixed-width block outside the timed bar.
+Even the first slide can be a section title slide.
+If it is not marked as as a section, it is treated as a prologue, and so is allocated no time.
 
 ### Untimed sections
 
