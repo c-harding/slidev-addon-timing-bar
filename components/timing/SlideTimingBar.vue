@@ -278,12 +278,12 @@ const expectedRange = computed(() => {
   return { start, end: start + remainingBuffer.value };
 });
 
-const arrowColor = computed(() => {
+const arrowColorClass = computed(() => {
   const e = elapsed.value;
   const { start, end } = expectedRange.value;
-  if (e >= start && e <= end) return '#000'; // on track
-  if (e < start) return '#22c55e'; // ahead (green-500)
-  return '#ef4444'; // behind (red-500)
+  if (e >= start && e <= end) return 'bg-black dark:bg-white'; // on track
+  if (e < start) return 'bg-green-500 dark:bg-green-400'; // ahead
+  return 'bg-red-500 dark:bg-red-400'; // behind
 });
 
 const {
@@ -378,7 +378,7 @@ function logRecordedDurations() {
 <template>
   <Teleport v-if="barPosition !== 'hidden'" defer :to="'.slidev-presenter'">
     <div
-      class="slide-timing-bar flex flex-row items-stretch col-span-full px-2 bg-white"
+      class="slide-timing-bar flex flex-row items-stretch col-span-full px-2 bg-main border-main"
       :class="[
         `slide-timing-bar--${barPosition}`,
         barPosition === 'bottom' ? 'border-t pb-7px' : 'border-b pt-7px',
@@ -448,13 +448,13 @@ function logRecordedDurations() {
           <div
             v-if="timerState.status !== 'stopped' && effectiveDuration > 0"
             class="absolute w-3 h-3 -translate-x-1/2"
+            :class="arrowColorClass"
             :style="{
               left: progressPct + '%',
               clipPath:
                 barPosition === 'bottom'
                   ? 'polygon(50% 100%, 0 0, 100% 0)'
                   : 'polygon(50% 0, 0 100%, 100% 100%)',
-              backgroundColor: arrowColor,
             }"
           />
         </div>

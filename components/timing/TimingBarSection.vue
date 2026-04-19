@@ -86,10 +86,10 @@ function onSlideLeave() {
       <title>{{ title }}</title>
       <polygon
         :points="position === 'bottom' ? '6,0 12,12 0,12' : '0,0 12,0 6,12'"
-        :class="active ? 'fill-blue-300' : 'fill-gray-300'"
+        :class="active ? 'fill-blue-300 dark:fill-blue-800' : 'fill-gray-300 dark:fill-gray-600'"
         paint-order="stroke"
         stroke-linejoin="miter"
-        stroke="white"
+        class="stroke-white dark:stroke-[#121212]"
         stroke-width="8"
       />
     </svg>
@@ -97,12 +97,12 @@ function onSlideLeave() {
   <!-- Normal section bar -->
   <div v-else class="overflow-x-hidden min-w-0 flex justify-center">
     <div
-      class="p-0.5 border-white border-2 cursor-pointer text-center relative min-w-0 bg-gray-300 hover:bg-gray-400 flex-1"
+      class="p-0.5 border-white dark:border-[#121212] border-2 cursor-pointer text-center relative min-w-0 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 flex-1"
       :class="[
         active
           ? position === 'bottom'
-            ? 'bg-blue-300! pt-2'
-            : 'bg-blue-300! pb-2'
+            ? 'bg-blue-300! dark:bg-blue-800! pt-2'
+            : 'bg-blue-300! dark:bg-blue-800! pb-2'
           : position === 'bottom'
             ? 'hover:pt-2 not-hover:border-t-8'
             : 'hover:pb-2 not-hover:border-b-8',
@@ -113,7 +113,7 @@ function onSlideLeave() {
       <div class="truncate">{{ durationString }}</div>
       <div
         v-if="active"
-        class="absolute left-0 h-1.5 bg-blue-600"
+        class="absolute left-0 h-1.5 bg-blue-600 dark:bg-blue-500"
         :class="position === 'bottom' ? 'top-0' : 'bottom-0'"
         :style="{ width: progress + '%' }"
       />
@@ -125,7 +125,7 @@ function onSlideLeave() {
           v-for="s in slides"
           :key="s.no"
           class="flex-1 cursor-pointer outline-solid outline-2 -outline-offset-2 outline-transparent -my-0.5 relative first:-ml-0.5 last:-mr-0.5"
-          :class="active ? 'hover:outline-blue-900' : 'hover:outline-gray-700'"
+          :class="active ? 'hover:outline-blue-900 dark:hover:outline-blue-400' : 'hover:outline-gray-700 dark:hover:outline-gray-400'"
           :style="{
             anchorName:
               hoveredSlide?.no === s.no ? '--hovered-slide' : undefined,
@@ -157,6 +157,10 @@ function onSlideLeave() {
   z-index: 200;
   background: rgb(0 0 0 / 0.8);
   color: white;
+}
+.dark .slide-tooltip {
+  background: rgb(255 255 255 / 0.85);
+  color: #121212;
   font-size: 0.75rem;
   border-radius: 0.25rem;
   padding: 0.125rem 0.375rem;
@@ -193,9 +197,9 @@ function onSlideLeave() {
   transition: fill 0.15s;
 }
 .section-wedge-wrapper:hover polygon {
-  --uno: fill-gray-400;
+  --uno: fill-gray-400 dark:fill-gray-500;
 }
 .section-wedge-wrapper--active:hover polygon {
-  --uno: fill-blue-400;
+  --uno: fill-blue-400 dark:fill-blue-700;
 }
 </style>

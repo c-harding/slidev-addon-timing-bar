@@ -22,7 +22,7 @@ function navigateToTarget() {
     :style="{ flexBasis: 0, flexGrow: durationSeconds }"
   >
     <div
-      class="flex-1 buffer-segment p-0.5 border-white border-2 text-center min-w-0"
+      class="flex-1 buffer-segment p-0.5 border-white dark:border-[#121212] border-2 text-center min-w-0"
       :class="[
         position === 'bottom' ? 'border-t-8' : 'border-b-8',
         targetSlide != null ? 'cursor-pointer' : 'cursor-default',
@@ -46,16 +46,20 @@ function navigateToTarget() {
 
 <style>
 .buffer-segment {
+  --buffer-stripe-color: theme('colors.gray.300');
+  --buffer-stripe-hover-color: theme('colors.gray.400');
+  --buffer-text-stroke-color: white;
+
   background: repeating-linear-gradient(
     -45deg,
     transparent,
     transparent 3px,
-    theme('colors.gray.300') 3px,
-    theme('colors.gray.300') 6px
+    var(--buffer-stripe-color) 3px,
+    var(--buffer-stripe-color) 6px
   );
   border-radius: 4px;
   color: theme('colors.gray.500');
-  -webkit-text-stroke: 5px white;
+  -webkit-text-stroke: 5px var(--buffer-text-stroke-color);
   paint-order: stroke fill;
 
   &:hover {
@@ -63,9 +67,16 @@ function navigateToTarget() {
       -45deg,
       transparent,
       transparent 3px,
-      theme('colors.gray.400') 3px,
-      theme('colors.gray.400') 6px
+      var(--buffer-stripe-hover-color) 3px,
+      var(--buffer-stripe-hover-color) 6px
     );
   }
+}
+.dark .buffer-segment {
+  --buffer-stripe-color: theme('colors.gray.600');
+  --buffer-stripe-hover-color: theme('colors.gray.500');
+  --buffer-text-stroke-color: #121212;
+
+  color: theme('colors.gray.400');
 }
 </style>
