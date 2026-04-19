@@ -24,7 +24,7 @@ const { slides, currentPage, clicks, clicksTotal } = useNav();
 
 type BarPosition = 'top' | 'bottom' | 'hidden';
 const barPosition = useLocalStorage<BarPosition>(
-  'slidev-timing-bar-position',
+  'slidev-timing-bar-height-position',
   defaultPosition,
 );
 
@@ -629,20 +629,21 @@ function logRecordedDurations() {
 
 /* Set section bar height variable on the grid container */
 .slidev-present {
-  --slidev-section-bar: 72px;
+  --slidev-timing-bar-height: 72px;
 }
 
 /* Adjust the notes vertical resizer position */
 .slidev-presenter:has(.slide-timing-bar--bottom)
   :is(.notes-vertical-resizer, .notes-vertical-resizer-left) {
   bottom: calc(
-    var(--slidev-section-bar, 0) + var(--slidev-presenter-bottom-height, 0px)
+    var(--slidev-timing-bar-height, 0) +
+      var(--slidev-presenter-bottom-height, 0px)
   );
 }
 
 .slidev-presenter:has(.slide-timing-bar--top)
   :is(.notes-vertical-resizer, .notes-vertical-resizer-left) {
-  top: var(--slidev-section-bar, 0);
+  top: var(--slidev-timing-bar-height, 0);
 }
 
 .buffer-segment {
