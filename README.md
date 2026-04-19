@@ -153,6 +153,8 @@ endTime: '14:30'
 
 Next to the Slidev clock, there are radio buttons labelled as ⏳ and 🕒 to toggle between duration mode and end-time mode.
 
+![Duration controls](public/radio-buttons.png)
+
 - In duration mode, the available time is the time shown.
   If this duration is longer than the sum of all section durations, the excess time is treated as a buffer and shown as a hatched area at the end of the bar.
 - In end-time mode, the available time is the time until the specified end time.
@@ -163,7 +165,7 @@ In this case, there will not be any buffer time allocated at all.
 
 - Double-click the duration/end time in the radio button label to override these values.
   Delete the value to reset it.
-- The **"Play to end"** button is only enabled when the end time is less than the duration.
+- The **"Catch up"** button is only enabled when the end time is less than the duration.
   Click it to skip the timer ahead such that it will end on time.
 
 ### Timing review
