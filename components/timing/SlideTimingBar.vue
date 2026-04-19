@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { configs, sharedState, useNav } from '@slidev/client';
-import { useInterval, useSessionStorage } from '@vueuse/core';
+import { useInterval, useLocalStorage, useSessionStorage } from '@vueuse/core';
 import { computed, nextTick, ref, toRef, watchEffect } from 'vue';
 import { formatDurations, summariseDurations } from './formatDurations';
 import {
@@ -16,11 +16,34 @@ import { useBufferConsumption } from './useBufferConsumption';
 import { useEndTime } from './useEndTime';
 import { useTimingRecorder } from './useTimingRecorder';
 
-const { position = 'bottom' } = defineProps<{
+const { position: defaultPosition = 'bottom' } = defineProps<{
   position?: 'top' | 'bottom';
 }>();
 
 const { slides, currentPage, clicks, clicksTotal } = useNav();
+
+type BarPosition = 'top' | 'bottom' | 'hidden';
+const barPosition = useLocalStorage<BarPosition>(
+  'slidev-timing-bar-position',
+  defaultPosition,
+);
+
+const oppositePositions = { top: 'bottom', bottom: 'top' } as const;
+
+function nextBarPosition(pos: BarPosition): BarPosition {
+  switch (pos) {
+    case 'hidden':
+      return defaultPosition;
+    case defaultPosition:
+      return oppositePositions[defaultPosition];
+    default:
+      return 'hidden';
+  }
+}
+
+function cycleBarPosition() {
+  barPosition.value = nextBarPosition(barPosition.value);
+}
 
 const vFocus = { mounted: (el: HTMLElement) => el.focus() };
 
@@ -355,14 +378,14 @@ function logRecordedDurations() {
 </script>
 
 <template>
-  <Teleport defer :to="'.slidev-presenter'">
+  <Teleport v-if="barPosition !== 'hidden'" defer :to="'.slidev-presenter'">
     <div
-      class="slide-timing-bar flex flex-row items-stretch col-span-full px-2"
+      class="slide-timing-bar flex flex-row items-stretch col-span-full px-2 bg-white"
       :class="[
-        `slide-timing-bar--${position}`,
-        position === 'bottom' ? 'border-t pb-2' : 'border-b pt-2',
+        `slide-timing-bar--${barPosition}`,
+        barPosition === 'bottom' ? 'border-t pb-7px' : 'border-b pt-7px',
       ]"
-      :style="{ order: position === 'top' ? -10 : 10 }"
+      :style="{ order: barPosition === 'top' ? -10 : 10 }"
     >
       <TimingBarSection
         v-if="prologueSection"
@@ -373,13 +396,13 @@ function logRecordedDurations() {
         :active="currentSection === prologueSection.no"
         :current-page="currentPage"
         :progress="sectionProgress"
-        :position
+        :position="barPosition"
         class="text-xs h-12"
-        :class="position === 'bottom' ? 'self-end' : 'self-start'"
+        :class="barPosition === 'bottom' ? 'self-end' : 'self-start'"
       />
       <div
         :class="
-          position === 'bottom' ? 'flex flex-col-reverse' : 'flex flex-col'
+          barPosition === 'bottom' ? 'flex flex-col-reverse' : 'flex flex-col'
         "
         class="flex-1 min-w-0"
       >
@@ -397,7 +420,7 @@ function logRecordedDurations() {
               :active="currentSection === section.no"
               :current-page="currentPage"
               :progress="sectionProgress"
-              :position
+              :position="barPosition"
               :wedge="sectionFlexGrow(section) === 0"
               :style="
                 sectionFlexGrow(section) > 0
@@ -416,7 +439,7 @@ function logRecordedDurations() {
             >
               <div
                 class="flex-1 buffer-segment p-0.5 border-white border-2 text-center min-w-0 cursor-default"
-                :class="position === 'bottom' ? 'border-t-8' : 'border-b-8'"
+                :class="barPosition === 'bottom' ? 'border-t-8' : 'border-b-8'"
                 :title="
                   section.title +
                   ': ' +
@@ -441,7 +464,7 @@ function logRecordedDurations() {
           >
             <div
               class="flex-1 buffer-segment p-0.5 border-white border-2 text-center min-w-0 cursor-default"
-              :class="position === 'bottom' ? 'border-t-8' : 'border-b-8'"
+              :class="barPosition === 'bottom' ? 'border-t-8' : 'border-b-8'"
               :title="'Buffer: ' + secondsToString(remainingBuffer)"
             >
               <div class="truncate text-[10px]">
@@ -458,7 +481,7 @@ function logRecordedDurations() {
             :style="{
               left: progressPct + '%',
               clipPath:
-                position === 'bottom'
+                barPosition === 'bottom'
                   ? 'polygon(50% 100%, 0 0, 100% 0)'
                   : 'polygon(50% 0, 0 100%, 100% 100%)',
               backgroundColor: arrowColor,
@@ -472,8 +495,8 @@ function logRecordedDurations() {
     defer
     to=".slidev-presenter > .grid-container > .grid-section.bottom"
   >
-    <div class="flex items-center gap-2 px-2">
-      <fieldset class="flex flex-col text-xs gap-1 justify-center w-16">
+    <div class="flex items-center px-2">
+      <fieldset class="flex flex-col text-xs gap-1 justify-center w-24">
         <label
           class="flex items-center gap-1 cursor-pointer"
           title="Presentation duration"
@@ -492,7 +515,7 @@ function logRecordedDurations() {
           <input
             v-else
             v-model="durationInput"
-            class="w-8 bg-transparent border-b border-current outline-none"
+            class="w-14 bg-transparent border-b border-current outline-none"
             @keydown.enter="
               durationOverride =
                 (parseDuration(durationInput) ?? 0) * 60 || null;
@@ -531,7 +554,7 @@ function logRecordedDurations() {
           <input
             v-else
             v-model="endTimeInput"
-            class="w-8 bg-transparent border-b border-current outline-none"
+            class="w-14 bg-transparent border-b border-current outline-none"
             @keydown.enter="
               endTimeOverride = endTimeInput || null;
               editingEndTime = false;
@@ -548,13 +571,13 @@ function logRecordedDurations() {
       </fieldset>
       <button
         :disabled="!showPlayToEnd"
-        class="text-xs p-1.5 my-auto cursor-pointer not-disabled:hover:bg-gray-300 disabled:opacity-30 rounded flex items-center"
+        class="text-xs slidev-icon-btn"
         title="Catch up to end time"
         @click="playToEnd"
       >
         <svg
           viewBox="0 0 16 16"
-          class="w-4 h-4"
+          class="w-3 h-3"
           fill="none"
           stroke="currentColor"
           stroke-width="1"
@@ -565,7 +588,7 @@ function logRecordedDurations() {
       </button>
       <button
         :disabled="!hasRecordedDurations"
-        class="text-xs p-1.5 my-auto cursor-pointer not-disabled:hover:bg-gray-300 disabled:opacity-30 rounded flex items-center"
+        class="text-xs slidev-icon-btn"
         :title="
           hasRecordedDurations
             ? 'Log recorded timings to console'
@@ -574,6 +597,13 @@ function logRecordedDurations() {
         @click="logRecordedDurations()"
       >
         <span class="i-carbon-catalog" />
+      </button>
+      <button
+        class="text-xs slidev-icon-btn"
+        title="Toggle timing bar"
+        @click="cycleBarPosition()"
+      >
+        <span class="i-carbon-progress-bar" />
       </button>
     </div>
   </Teleport>
@@ -595,6 +625,24 @@ function logRecordedDurations() {
 .slidev-presenter > .grid-container > .grid-section.bottom > :nth-child(3) {
   order: 10;
   padding-left: 4px !important;
+}
+
+/* Set section bar height variable on the grid container */
+.slidev-present {
+  --slidev-section-bar: 72px;
+}
+
+/* Adjust the notes vertical resizer position */
+.slidev-presenter:has(.slide-timing-bar--bottom)
+  :is(.notes-vertical-resizer, .notes-vertical-resizer-left) {
+  bottom: calc(
+    var(--slidev-section-bar, 0) + var(--slidev-presenter-bottom-height, 0px)
+  );
+}
+
+.slidev-presenter:has(.slide-timing-bar--top)
+  :is(.notes-vertical-resizer, .notes-vertical-resizer-left) {
+  top: var(--slidev-section-bar, 0);
 }
 
 .buffer-segment {
