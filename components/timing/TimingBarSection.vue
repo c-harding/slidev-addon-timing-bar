@@ -69,6 +69,10 @@ function onSlideLeave() {
     warm = false;
   }, 300);
 }
+
+defineOptions({
+  inheritAttrs: false,
+});
 </script>
 
 <template>
@@ -79,6 +83,7 @@ function onSlideLeave() {
     :class="{ 'section-wedge-wrapper--active': active }"
     :title="title"
     @click="go(sectionNo)"
+    v-bind="$attrs"
   >
     <svg
       class="section-wedge"
@@ -101,7 +106,11 @@ function onSlideLeave() {
     </svg>
   </div>
   <!-- Normal section bar -->
-  <div v-else class="overflow-x-hidden min-w-0 flex justify-center">
+  <div
+    v-else
+    class="overflow-x-hidden min-w-0 flex justify-center"
+    v-bind="$attrs"
+  >
     <div
       class="p-0.5 border-white dark:border-[#121212] border-2 cursor-pointer text-center relative min-w-0 bg-gray-300 dark:bg-gray-700 hover:bg-gray-400 dark:hover:bg-gray-600 flex-1"
       :class="[
