@@ -3,7 +3,7 @@
 A [Slidev](https://sli.dev) addon that adds a section-based timing bar to the presenter view.
 Plan your talk with per-section durations, track your progress in real time, and review recorded timings after your presentation.
 
-![Timing bar in the presenter view](docs/timing-bar.png)
+![Timing bar in the presenter view](public/timing-bar.png)
 
 ## Installation
 
@@ -74,7 +74,7 @@ They appear as hatched segments that grow as buffer is consumed.
 The buffer comes from the difference between the duration of the overall presentation and the sum of all section durations, and before starting, it is shown as a hatched area at the end of the bar.
 When you run over time in (or before reaching) a section with a buffer, the buffer is absorbed by this section, and the hatched area is moved to the end of this section.
 
-![Buffer consumption in the timing bar](docs/middle-buffer.png)
+![Buffer consumption in the timing bar](public/middle-buffer.png)
 
 ```yaml
 ---
@@ -126,9 +126,9 @@ endTime: '14:30'
 - Horizontal bar in the presenter view with one segment per section, sized proportionally to planned duration
 - The progress arrow tracks the elapsed time, color-coded: **black** (on track), **green** (ahead of schedule), **red** (behind schedule)
 
-  | Ahead of schedule                     | Behind schedule                   |
-  | ------------------------------------- | --------------------------------- |
-  | ![Green arrow](docs/green-marker.png) | ![Red arrow](docs/red-marker.png) |
+  | Ahead of schedule                       | Behind schedule                     |
+  | --------------------------------------- | ----------------------------------- |
+  | ![Green arrow](public/green-marker.png) | ![Red arrow](public/red-marker.png) |
 
 - The current section is highlighted in blue, and the progress is shown by a progress bar within the segment.
 - Hover over the progress bar to see the individual slide titles.
@@ -156,7 +156,7 @@ In this case, there will not be any buffer time allocated at all.
 - Click the catalog button to open a modal showing actual vs. planned time per section and per slide
 - Also logs a text summary to the console.
 
-![Recorded timings modal](docs/recorded-timings.png)
+![Recorded timings modal](public/recorded-timings.png)
 
 ### Toggle timing bar
 
