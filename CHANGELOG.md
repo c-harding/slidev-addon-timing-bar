@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.3] - 2026-04-20
+
+### Added
+
+- Added author, homepage, bugs, and engines fields to package.json for npm best practices.
+
 ## [0.1.2] - 2026-04-20
 
 ### Fixed
@@ -39,7 +45,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Version bump to 0.1.0 for first stable release.
 
-[Unreleased]: https://github.com/c-harding/slidev-addon-timing-bar/compare/0.1.2...HEAD
+[Unreleased]: https://github.com/c-harding/slidev-addon-timing-bar/compare/0.1.3...HEAD
+[0.1.3]: https://github.com/c-harding/slidev-addon-timing-bar/compare/0.1.2...0.1.3
 [0.1.2]: https://github.com/c-harding/slidev-addon-timing-bar/compare/0.1.1...0.1.2
 [0.1.1]: https://github.com/c-harding/slidev-addon-timing-bar/compare/0.1.0...0.1.1
 [0.1.0]: https://github.com/c-harding/slidev-addon-timing-bar/releases/tag/0.1.0
