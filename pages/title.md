@@ -21,9 +21,9 @@ The timing bar is live in presenter mode right now.
 
 There are different versions of the slides in this repo:
 
-- [slides.md](https://c-harding.github.io/slidev-addon-timing-bar/) (default)
-- [slides-no-timings.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-no-timings/) (no sections or durations at all)
-- [slides-with-untimed.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-with-untimed/) (includes untimed sections for testing)
-- [slides-total-duration.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-total-duration/) (only total duration set, no sections)
-- [slides-total-and-section-durations.md](https://c-harding.github.io/slidev-addon-timing-bar/slides-total-and-section-durations/) (total and section durations set, but no buffer)
+- <a href="https://c-harding.github.io/slidev-addon-timing-bar/#/presenter" target="_self">slides.md</a> (default)
+- <a href="https://c-harding.github.io/slidev-addon-timing-bar/slides-no-timings/#/presenter" target="_self">slides-no-timings.md</a> (no sections or durations at all)
+- <a href="https://c-harding.github.io/slidev-addon-timing-bar/slides-with-untimed/#/presenter" target="_self">slides-with-untimed.md</a> (includes untimed sections for testing)
+- <a href="https://c-harding.github.io/slidev-addon-timing-bar/slides-total-duration/#/presenter" target="_self">slides-total-duration.md</a> (only total duration set, no sections)
+- <a href="https://c-harding.github.io/slidev-addon-timing-bar/slides-total-and-section-durations/#/presenter" target="_self">slides-total-and-section-durations.md</a> (total and section durations set, but no buffer)
 -->
